@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7110E6371E83A6BE00A5A9FC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7110E6361E83A6BE00A5A9FC /* main.cpp */; };
+		7110E6411E850F3000A5A9FC /* libopencv_highgui.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7110E63D1E850F3000A5A9FC /* libopencv_highgui.3.2.0.dylib */; };
+		7110E6421E850F3000A5A9FC /* libopencv_imgcodecs.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7110E63E1E850F3000A5A9FC /* libopencv_imgcodecs.3.2.0.dylib */; };
+		7110E6431E850F3000A5A9FC /* libopencv_imgproc.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7110E63F1E850F3000A5A9FC /* libopencv_imgproc.3.2.0.dylib */; };
+		7110E6441E850F3000A5A9FC /* libopencv_core.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7110E6401E850F3000A5A9FC /* libopencv_core.3.2.0.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,10 @@
 /* Begin PBXFileReference section */
 		7110E6331E83A6BE00A5A9FC /* HoughOpencv */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HoughOpencv; sourceTree = BUILT_PRODUCTS_DIR; };
 		7110E6361E83A6BE00A5A9FC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		7110E63D1E850F3000A5A9FC /* libopencv_highgui.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_highgui.3.2.0.dylib; path = "../../../Documents/opencv-3.2.0/build/lib/libopencv_highgui.3.2.0.dylib"; sourceTree = "<group>"; };
+		7110E63E1E850F3000A5A9FC /* libopencv_imgcodecs.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgcodecs.3.2.0.dylib; path = "../../../Documents/opencv-3.2.0/build/lib/libopencv_imgcodecs.3.2.0.dylib"; sourceTree = "<group>"; };
+		7110E63F1E850F3000A5A9FC /* libopencv_imgproc.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.2.0.dylib; path = "../../../Documents/opencv-3.2.0/build/lib/libopencv_imgproc.3.2.0.dylib"; sourceTree = "<group>"; };
+		7110E6401E850F3000A5A9FC /* libopencv_core.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.2.0.dylib; path = "../../../Documents/opencv-3.2.0/build/lib/libopencv_core.3.2.0.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +40,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7110E6431E850F3000A5A9FC /* libopencv_imgproc.3.2.0.dylib in Frameworks */,
+				7110E6441E850F3000A5A9FC /* libopencv_core.3.2.0.dylib in Frameworks */,
+				7110E6411E850F3000A5A9FC /* libopencv_highgui.3.2.0.dylib in Frameworks */,
+				7110E6421E850F3000A5A9FC /* libopencv_imgcodecs.3.2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +53,10 @@
 		7110E62A1E83A6BE00A5A9FC = {
 			isa = PBXGroup;
 			children = (
+				7110E63D1E850F3000A5A9FC /* libopencv_highgui.3.2.0.dylib */,
+				7110E63E1E850F3000A5A9FC /* libopencv_imgcodecs.3.2.0.dylib */,
+				7110E63F1E850F3000A5A9FC /* libopencv_imgproc.3.2.0.dylib */,
+				7110E6401E850F3000A5A9FC /* libopencv_core.3.2.0.dylib */,
 				7110E6351E83A6BE00A5A9FC /* HoughOpencv */,
 				7110E6341E83A6BE00A5A9FC /* Products */,
 			);
@@ -217,7 +233,33 @@
 		7110E63B1E83A6BE00A5A9FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEVELOPMENT_TEAM = 3D493D34W5;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/src;
+				HEADER_SEARCH_PATHS = (
+					"/Users/alex231330/Documents/opencv-3.2.0/include",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/alex231330/Documents/opencv-3.2.0/build/lib";
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -225,7 +267,33 @@
 		7110E63C1E83A6BE00A5A9FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				DEVELOPMENT_TEAM = 3D493D34W5;
+				FRAMEWORK_SEARCH_PATHS = /usr/local/src;
+				HEADER_SEARCH_PATHS = (
+					"/Users/alex231330/Documents/opencv-3.2.0/include",
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/alex231330/Documents/opencv-3.2.0/build/lib";
+				OTHER_LDFLAGS = (
+					"-lopencv_calib3d",
+					"-lopencv_core",
+					"-lopencv_features2d",
+					"-lopencv_flann",
+					"-lopencv_highgui",
+					"-lopencv_imgcodecs",
+					"-lopencv_imgproc",
+					"-lopencv_ml",
+					"-lopencv_objdetect",
+					"-lopencv_photo",
+					"-lopencv_shape",
+					"-lopencv_stitching",
+					"-lopencv_superres",
+					"-lopencv_ts",
+					"-lopencv_video",
+					"-lopencv_videoio",
+					"-lopencv_videostab",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -249,6 +317,7 @@
 				7110E63C1E83A6BE00A5A9FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

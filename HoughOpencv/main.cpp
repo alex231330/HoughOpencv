@@ -16,15 +16,15 @@
 #include <unistd.h>
 #include <fstream>
 #include <math.h>
-
 using namespace std;
 using namespace cv;
 
 #define PointVal(img,x,y,c) (*((unsigned char*)(img->imageData+y*img->widthStep+x*img->nChannels+c)))
 
-const int rad = 180 / abs(acos(-1));
+const int rad = 180 / CV_PI;
 double theta = rad * -90;
 int xpoint = 0;
+
 
 Mat rotateImage(const Mat& source, double angle)
 {
@@ -57,9 +57,8 @@ int main(int argc, const char * argv[]) {
     double sins[20];
     fillCosArray(coss, 20);
     fillSinArray(sins, 20);
-    //CvCapture* capture = cvCreateCameraCapture(0);
     IplImage* image;
-    image = cvLoadImage("/Users/alex231330/Downloads/test.jpg");
+    image = cvLoadImage("/Users/alex231330/Documents/test2.jpg");
     IplImage* grayscale = cvCreateImage(cvGetSize(image), IPL_DEPTH_8U, 1);
     IplImage* sobel = cvCreateImage(cvGetSize(image), IPL_DEPTH_8U, 1);
     IplImage* canny = cvCreateImage(cvGetSize(image), IPL_DEPTH_8U, 1);
@@ -67,25 +66,21 @@ int main(int argc, const char * argv[]) {
     cvSmooth(image, image, CV_GAUSSIAN);
     cvCvtColor(image, grayscale, CV_BGR2GRAY);
     cvSobel(grayscale, sobel, 0, 1, 3);
-    cvCanny(sobel, canny, 70, 130);
+    cvCanny(sobel, canny, 500, 200, 3);
     int RMax = cvRound(sqrt((double)(image->width * image->width + image->height * image->height)));
-    while(true) {
-        //image = cvQueryFrame(capture);
-     //   int diagonal = (int)(sqrt(canny->width * canny->width + canny->height * canny->height));
         IplImage* gray = cvCreateImage(cvSize(RMax, 180), IPL_DEPTH_16U, 1);
-        
-        for(int y = 0; y < canny->height; y++){
+        for(int y = 0; y < canny->height; y++) {
             uchar* ptr = (uchar*) (canny->imageData + y * canny->widthStep);
-            for(int x = 0; x < canny->width; x++){
-                if(ptr[x]>0){ // это пиксель контура?
+            for(int x = 0; x < canny->width; x++) {
+                if(ptr[x] > 0) {
                     // рассмотрим все возможные прямые, которые могут
                     // проходить через эту точку
-                    for(int f = 0; f < 180; f++){ //перебираем все возможные углы наклона
+                    for(int f = 0; f < 180; f+=2) { //перебираем все возможные углы наклона
                         short* ptrP = (short*)(gray->imageData + f * gray->widthStep);
-                        for(int r = 0; r < RMax; r++){ // перебираем все возможные расстояния от начала координат
+                        for(int r = 0; r < RMax; r+=10) { // перебираем все возможные расстояния от начала координат
                             int theta = f * CV_PI / 180.0; // переводим градусы в радианы
                             // Если решение уравнения достаточно хорошее (точность больше заданой)
-                            if ( abs(((y) * sin(theta) + (x) * cos(theta)) - r) < 0.1 ){
+                            if ( abs(((y) * sin(theta) + (x) * cos(theta)) - r) < 0.1 ) {
                                 ptrP[r]++; // увеличиваем счетчик для этой точки фазового пространства.
                             }
                         }
@@ -107,17 +102,16 @@ int main(int argc, const char * argv[]) {
                 }
             }
         }
-        double thp =  (abs(acos(-1) / 180) * -90) + (abs(acos(-1) / 180)) * xpoint;
+        
+        double thp =  ((CV_PI / 180) * -90) + (CV_PI / 180) * xpoint;
         double angle = (90 - abs(thp) * (180 / abs(acos(-1))) * (thp < 0 ? -1 : 1));
         cout << angle << "\n";
+        
         cvShowImage("Gray scale", grayscale);
         cvShowImage("Sobel", sobel);
         cvShowImage("Canny", canny);
         cvShowImage("Out", gray);
-        if (waitKey(100) == 27)
-        {
-            cout << "esc key is pressed" << endl;
-        }
-    }
+        
+    waitKey();
     return 0;
 }
